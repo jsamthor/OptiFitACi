@@ -1,11 +1,15 @@
 Package: fitacis4
 Type: Package
-Title: What the Package Does (Title Case)
+Title: Enhancements to 'plantecophys'
 Version: 0.1.0
-Author: Who wrote it
+Author: J.S.Amthor made code updates
 Maintainer: The package maintainer <yourself@somewhere.net>
-Description: More about what it does (maybe more than one line)
-    Use four spaces when indenting paragraphs within the Description.
+Description: Options for multiple gm-Tleaf functional forms and other enhancements (and speed up) of 'plantecowrap'.
 License: What license is it under?
+Depends: R (>= 3.5.0),
+    ggplot2 (>= 3.2.1),
+    minpack.lm (>= 1.2-1),
+    plantecophys (>= 1.4-4),
+    tidyr (>= 1.0.0)
 Encoding: UTF-8
 LazyData: true
