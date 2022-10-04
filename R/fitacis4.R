@@ -53,7 +53,7 @@
                gm_coef1  = -0.009,      # cotton data
                gm_coef2  =  0.000355,   # cotton data
 
-               gm25      = 0.08701,     # mol m-2 s-1 bar-1 [Plantecowrap default]
+               gm25      = 0.08701,     # mol m-2 s-1 bar-1 [plantecowrap default]
                                         # [plantecophys default = infinite]
 
                Egm       = 47.650,      # kJ mol-1 [plantecowrap default]
