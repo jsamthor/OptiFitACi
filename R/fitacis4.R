@@ -47,16 +47,17 @@
 #-------------------------------------------------------------------------------
 # temperature response for gm from one of three functional forms
 
-               gm_method = "Arr2",      # can be "Quad", "Arr1", "Arr2"
+               gm_method = "Quad",      # can be "Quad", "Arr1", "Arr2"
 
                gm_coef0  =  0.571,      # cotton data
                gm_coef1  = -0.009,      # cotton data
                gm_coef2  =  0.000355,   # cotton data
 
-               Egm       = 47.650,      # kJ mol-1 [plantecowrap default]
                gm25      = 0.08701,     # mol m-2 s-1 bar-1 [Plantecowrap default]
                                         # [plantecophys default = infinite]
 
+               Egm       = 47.650,      # kJ mol-1 [plantecowrap default]
+                       
                Arr2_c    = 20.1,        # based on Bernacchi et al. (2002)
                Arr2_Ha   = 49.6,        # based on Bernacchi et al. (2002)
                Arr2_Hd   = 437.4,       # based on Bernacchi et al. (2002)
