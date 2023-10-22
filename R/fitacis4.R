@@ -30,7 +30,8 @@
 #
 # For method [1] the quadratic equation should already be in the correct units
 # For methods [2] and [3] the gm25 entered should be given with correct units;
-# the temperature response is independent of units (e.g., bar v. Pa)
+# the temperature response is independent of units (i.e., it is a multiplier
+# relative to the rate at 25 degrees Celsius)
 #
 # Arguments for mesophyll conductance calculations using quadratic temperature
 # response:
@@ -53,31 +54,34 @@
                gm_coef1  = -0.009,      # cotton data
                gm_coef2  =  0.000355,   # cotton data
 
-               gm25      = 0.08701,     # mol m-2 s-1 bar-1 [plantecowrap default]
+               gm25      = 0.53,        # mol m-2 s-1 bar-1 [cotton data]
                                         # [plantecophys default = infinite]
 
-               Egm       = 47.650,      # kJ mol-1 [plantecowrap default]
+               Egm       = 8.59,        # kJ mol-1 [cotton data for Arr1 method]
                        
-               Arr2_c    = 20.1,        # based on Bernacchi et al. (2002)
+               Arr2_c    = 20.0098,     # based on Bernacchi et al. (2002)
                Arr2_Ha   = 49.6,        # based on Bernacchi et al. (2002)
                Arr2_Hd   = 437.4,       # based on Bernacchi et al. (2002)
                Arr2_S    = 1.4,         # based on Bernacchi et al. (2002)
 
 # end of temperature response for gm
 #-------------------------------------------------------------------------------
-               K25          = 718.40,    # umol mol-1 [plantecophys default]
-               Ek           = 65.50828,  # kJ mol-1 @ 25 C [plantecophys default]
-               Gstar25      = 42.75,     # umol mol-1 @ 25 C [plantecophys default]
-               Egamma       = 37.83,     # kJ mol-1 [plantecophys default]
+               K25          = 421.488,   # umol mol-1 @ 25 deg C
+               Ek           = 53.03,     # kJ mol-1
+               Gstar25      = 39.98,     # umol mol-1 @ 25 C
+               Egamma       = 28.11,     # kJ mol-1
                fitmethod    = "default",
                fitTPU       = TRUE,
+               alphag       = 0,         # default, fraction (0-1) of glycolate NOT
+                                         # returned to the chloroplast in
+                                         # photorespiration. alphag = 0 is the MOST
+                                         # efficient option (flat line TPU limitation)
                Tcorrect     = FALSE,
                useRd        = FALSE,
                citransition = NULL,      # umol CO2 mol-1
-               alphag       = 0,         # [plantecophys default]
-               PPFD         = NULL,      # umol m-2 s-1
+               PPFD         = NULL,      # umol photons (PAR) m-2 s-1
                Tleaf        = NULL,      # degress Celsius
-               alpha        = 0.24,      # umol CO2 / umol photons [plantecophys default]
+               alpha        = 0.24,      # umol CO2 / umol photons
                theta        = 0.85,      # [plantecophys default]
 
                varnames     = list(ALEAF = "Photo",  # umol CO2 m-2 s-1
@@ -159,6 +163,16 @@
       print ('gm_method entered is')
       print (gm_method)
     }
+
+#-------------------------------------------------------------------------------
+# If we are using experimentally measured/estimated Rd (rather than letting the
+# fitting algorithm estimate Rd) -- i.e., useRd = TRUE -- then ALL the Rd values
+# for an individual set of A-Ci measurements MUST BE IDENTICAL (e.g., all the
+# data lines for a rep of a species/treatment at a single temperature). So if
+# there are different Rd values for different measurements contributing to a
+# single A-Ci fit, use their average
+
+    if (useRd) data[[i]]$Rd = mean(data[[i]]$Rd)
 
 #-------------------------------------------------------------------------------
 # Fit ACi curve by calling the 'fitaci' function with desired parameter values
