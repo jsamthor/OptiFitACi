@@ -1,7 +1,7 @@
 #==============================================================================
 # FUNCTION fitacis4
 #
-# Three options for mesophyll conductance temperature response
+# Three (four) options for mesophyll conductance temperature response
 #
 # [1] gm_method = "Quad"  : quadratic equation fitted to actual gm values
 #
@@ -23,6 +23,10 @@
 #     by the parameters from Bernacchi et al. (2002) Plant Physiology 130:
 #     1992-1998, which is scaled to 1 at 25 C. That temperature response is
 #     then multiplied by gm25 (analogous to Arr1)
+#
+# [4] gm_method = "ignore"  :  infinite mesophyll conductance
+#
+#     This sets gmeso = NULL, which is the plantecophys default
 #
 # DEFAULT values for each method are in the native function, and for Arr2, if
 # the intent is use Bernacchi et al.'s equation, leave them alone and only
@@ -48,7 +52,7 @@
 #-------------------------------------------------------------------------------
 # temperature response for gm from one of three functional forms
 
-               gm_method = "Quad",      # can be "Quad", "Arr1", "Arr2"
+               gm_method = "Quad",      # can be "Quad", "Arr1", "Arr2", "ignore"
 
                gm_coef0  =  0.571,      # cotton data
                gm_coef1  = -0.009,      # cotton data
@@ -156,6 +160,10 @@
 
       gmeso = gm25 * exp(Arr2_c - Arr2_Ha / RgasTK) /
                      (1 + exp((Arr2_S * TleafK - Arr2_Hd) / RgasTK))
+					 
+	} else if (gm_method == 'ignore') {      # gmeso = NULL ; plantecophys default	
+
+      gmeso = NULL	
 
     } else                          {        # BOGUS gm_method value: ERROR
 
