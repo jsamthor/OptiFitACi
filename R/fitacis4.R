@@ -5,15 +5,15 @@
 # composed of CO2 exchange rates at different intercellular CO2 concentrations
 # (A-Ci data) and prepares the data for input to the function 'fitaci' in the R
 # package 'plantecophys,' authored by Remko Duursma, that fits functions to the
-# A-Ci data estimate photosynthetic parameters including V<c,max> and J<max>,
+# A-Ci data to estimate photosynthetic parameters including V<c,max> and J<max>,
 # the maximum rate of carboxylation (umol m-2 s-1) and light-saturated potential
-# rate of photosynthetic electron transport (umol m-2 s-1) [see
+# rate of photosynthetic electron transport (umol m-2 s-1), respectively [see
 # https://cran.r-project.org/web/packages/plantecophys/index.html].
 #
 # 'fitacis4' is an extension of the function 'fitacis2' in the R package
 # 'plantecowrap,' authored by Joseph Stinziano, Demi Gamble [Demi Sargent],
 # Robert Sharwood, and Warren Conaty, that provides extended flexibility in the
-# use of inputs to the function 'fitaci' [see
+# use of inputs to the function 'fitaci' in the R package 'plantecophys' [see
 # https://cran.r-project.org/web/packages/plantecowrap/index.html
 #
 # One purpose of 'fitacis4' is to allow input of a value for leaf mesophyll
