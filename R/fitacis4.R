@@ -40,8 +40,9 @@
 # temperatures, the function used in fitacis2 (but with a faster calculation),
 # and two new functions, labeled methods "Quad" and "Arr2" and described below.
 #
-# The three (four) options for mesophyll conductance and temperature response in
-# 'fitacis4' are:
+# The three (four) options for mesophyll conductance and its response to
+# temperature in 'fitacis4' are [three g<m> treatments and a fourth option to
+# ignore g<m>]:
 #
 # [1] gm_method = "Quad"  : quadratic equation fitted to actual gm values
 #
@@ -91,7 +92,7 @@
 # Calculations of the temperature responses of Km and gammastar in fitacis4
 # are the same as in fitacis2 (but slightly faster)
 #
-# J.S. Amthor, 2 Nov 2023
+# J.S. Amthor, November 2023 [update]
 #------------------------------------------------------------------------------
 
   fitacis4 = function (data,
@@ -118,10 +119,10 @@
 
 # end of temperature response for gm
 #-------------------------------------------------------------------------------
-               K25          = 421.488,   # umol mol-1 @ 25 deg C
-               Ek           = 53.03,     # kJ mol-1
-               Gstar25      = 39.98,     # umol mol-1 @ 25 C
-               Egamma       = 28.11,     # kJ mol-1
+               K25          = 541.47,    # umol mol-1 @ 25 deg C [cotton]
+               Ek           = 53.03,     # kJ mol-1              [cotton]
+               Gstar25      = 39.98,     # umol mol-1 @ 25 C     [cotton]
+               Egamma       = 28.11,     # kJ mol-1              [cotton]
                fitmethod    = "default",
                fitTPU       = TRUE,
                alphag       = 0,         # default, fraction (0-1) of glycolate NOT
@@ -134,7 +135,7 @@
                PPFD         = NULL,      # umol photons (PAR) m-2 s-1
                Tleaf        = NULL,      # degress Celsius
                alpha        = 0.24,      # umol CO2 / umol photons
-               theta        = 0.85,      # [plantecophys default]
+               theta        = 0.85,      # [plantecophys/fitaci default]
 
                varnames     = list(ALEAF = "Photo",  # umol CO2 m-2 s-1
                                    Tleaf = "Tleaf",  # degrees Celsius
