@@ -49,7 +49,7 @@
 #     Input is the quadratic equation fitted to measured (actual) gm values.
 #     The equation is entered with the three coefficients a, b, c in the
 #     equation of form g<m> = a + b.Tleaf + c.Tleaf^2 where Tleaf is leaf
-#     temperature in deg Celsius
+#     temperature in degrees Celsius
 #
 #     The variable names for coefficients a, b, and c used for mesophyll
 #     conductance calculations using a quadratic temperature response are:
@@ -64,21 +64,21 @@
 #
 #     Input is gm at 25 C (gm25) and 'activation energy' (Egm). The underlying
 #     temperature response, characterized by the activation energy, is scaled to
-#     1 at 25 C; the temperature respose is then multiplied by gm25. This is the
-#     formulation in 'fitacis2'
+#     1.0 at 25 C; the temperature respose is then multiplied by gm25. This is the
+#     formulation in 'fitacis2' (R package plantecowrap)
 #
-# [3] gm_method = "Arr2"  :  Arrhenius equation with 'deactivation'
+# [3] gm_method = "Arr2"  :  Arrhenius equation with 'deactivation' at high Tleaf
 #
 #     Input is gm at 25 C (gm25), an activation energy (Arr2_Ha), an entropy
 #     term (Arr2_S), and a deactivation term (Arr2_Hd). The deault temperature
 #     response is parameters are from Bernacchi et al. (2002) Plant Physiology 130:
-#     1992-1998, which is scaled to 1 at 25 C. That temperature response is
+#     1992-1998, which is scaled to 1.0 at 25 C. That temperature response is
 #     then multiplied by gm25 (analogous to Arr1)
 #
 # [4] gm_method = "ignore"  :  infinite mesophyll conductance
 #
 #     This sets gmeso = NULL, which is the 'fitaci' default in the R package
-#     'plantecophys'
+#     'plantecophys'. It is equivalent to infinite g<m>
 #
 # DEFAULT values for each method are in the native function, and for Arr2, if
 # the intent is use Bernacchi et al.'s equation, leave them alone and only
@@ -100,7 +100,7 @@
                group2 = NA,
                group3 = NA,
 #-------------------------------------------------------------------------------
-# temperature response for gm from one of three functional forms
+# Start of temperature response for gm input variables section
 
                gm_method = "Quad",      # can be "Quad", "Arr1", "Arr2", "ignore"
 
@@ -108,16 +108,18 @@
                gm_coef1  = -0.009,      # cotton data
                gm_coef2  =  0.000355,   # cotton data
 
-               gm25      = 0.53,        # mol m-2 s-1 bar-1 [cotton data]
+               gm25      = 0.53,        # mol m-2 s-1 bar-1 [cotton]
 
                Egm       = 8.59,        # kJ mol-1 [cotton data for Arr1 method]
                        
-               Arr2_c    = 20.0098,     # based on Bernacchi et al. (2002)
-               Arr2_Ha   = 49.6,        # based on Bernacchi et al. (2002)
-               Arr2_Hd   = 437.4,       # based on Bernacchi et al. (2002)
-               Arr2_S    = 1.4,         # based on Bernacchi et al. (2002)
+               Arr2_c    = 20.0098,     # tobacco, Bernacchi et al. (2002)
+               Arr2_Ha   = 49.6,        # tobacco, Bernacchi et al. (2002)
+               Arr2_Hd   = 437.4,       # tobacco, Bernacchi et al. (2002)
+               Arr2_S    = 1.4,         # tobacco, Bernacchi et al. (2002)
 
-# end of temperature response for gm
+# When 'gm_method = "ignore"' no other variables related to g<m> are needed/used
+
+# End of temperature response for gm input variables section
 #-------------------------------------------------------------------------------
                K25          = 541.47,    # umol mol-1 @ 25 deg C [cotton]
                Ek           = 53.03,     # kJ mol-1              [cotton]
@@ -133,9 +135,9 @@
                useRd        = FALSE,
                citransition = NULL,      # umol CO2 mol-1
                PPFD         = NULL,      # umol photons (PAR) m-2 s-1
-               Tleaf        = NULL,      # degress Celsius
+               Tleaf        = NULL,      # degrees Celsius
                alpha        = 0.24,      # umol CO2 / umol photons
-               theta        = 0.85,      # [plantecophys/fitaci default]
+               theta        = 0.85,      # fitaci default
 
                varnames     = list(ALEAF = "Photo",  # umol CO2 m-2 s-1
                                    Tleaf = "Tleaf",  # degrees Celsius
@@ -171,7 +173,10 @@
   for (i in 1:length(data)) {  
 
 #-------------------------------------------------------------------------------
-# Re-written and new formulations for Km, GammaStar, and gmeso
+# Re-written and new formulations for temperature responses of Km (the
+# 'combined' rubisco Michaelis-Menten constants for CO2 and O2), GammaStar (the
+# CO2 compensation with Rd = 0, umol/mol), and gmeso (mesophyll conductance,
+# mol m-2 s-1 bar-1)
 
     Patm   = mean(data[[i]]$Press)          # measured air pressure
     Rgas   = 0.00831446                     # gas constant (kJ / K.mole)
@@ -210,8 +215,8 @@
       gmeso = gm25 * exp(Arr2_c - Arr2_Ha / RgasTK) /
                      (1 + exp((Arr2_S * TleafK - Arr2_Hd) / RgasTK))
 					 
-	} else if (gm_method == 'ignore') {      # gmeso = NULL ; plantecophys default	
-
+	} else if (gm_method == 'ignore') {  # gmeso = NULL (fitaci default
+	                                     # in R package plantecophys)
       gmeso = NULL	
 
     } else                          {        # BOGUS gm_method value: ERROR
@@ -246,4 +251,4 @@
   }                                         # End of this curve fit
 
   return(fits)                              # Return all curve fits in list
-}                                           # End of function
+}                                           # End of function fitacis4
