@@ -64,13 +64,13 @@
 #
 #     Input is gm at 25 C (gm25) and 'activation energy' (Egm). The underlying
 #     temperature response, characterized by the activation energy, is scaled to
-#     1.0 at 25 C; the temperature respose is then multiplied by gm25. This is the
+#     1.0 at 25 C; the temperature response is then multiplied by gm25. This is the
 #     formulation in 'fitacis2' (R package plantecowrap)
 #
 # [3] gm_method = "Arr2"  :  Arrhenius equation with 'deactivation' at high Tleaf
 #
 #     Input is gm at 25 C (gm25), an activation energy (Arr2_Ha), an entropy
-#     term (Arr2_S), and a deactivation term (Arr2_Hd). The deault temperature
+#     term (Arr2_S), and a deactivation term (Arr2_Hd). The default temperature
 #     response is parameters are from Bernacchi et al. (2002) Plant Physiology 130:
 #     1992-1998, which is scaled to 1.0 at 25 C. That temperature response is
 #     then multiplied by gm25 (analogous to Arr1)
@@ -188,7 +188,7 @@
 
 # Tfactor = 0 at 25 degrees Celsius (and e^0 = 1) for the Arrhenius temperature
 # response. The 'activation energies' and values at 25 deg C are then used
-# with Tfactor for Km, GammaStar, and gmeso temperaure responses
+# with Tfactor for Km, GammaStar, and gmeso temperature responses
 
     Tfactor = (TleafK - T25K) / (T25K * RgasTK) # TleafK factor relative to 25 C
 
