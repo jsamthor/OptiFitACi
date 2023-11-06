@@ -182,7 +182,7 @@
 # applied. The output from the analysis is saved in 'fits1', which can be named
 # anything (i.e., any valid R name)
 #
-# This setp may take a few seconds
+# This step may take a few seconds
 
   fits1 = fitacis4 (testd,
                     group1 = "Ident",
