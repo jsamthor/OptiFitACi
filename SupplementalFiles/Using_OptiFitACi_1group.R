@@ -125,14 +125,14 @@
 # At this point all the required software should be available to the R session
 #
 # Now set the working directory to the directory (folder) with the data, and
-# that will contain the ouput ('c:/test' in this example). The test dataset is
+# that will contain the output ('c:/test' in this example). The test dataset is
 # in the file 'TestCotton_1group.csv' as outlined in the header comments above.
 # It will be referred to as "testd" (test data) in this program/script
 
   setwd("c:/Test")
   testd = read.csv("TestCotton_1group.csv")
 
-# Display the data stucture using function 'str' to check that all is as
+# Display the data structure using function 'str' to check that all is as
 # expected, i.e., that all the dataset variables are present and the first
 # several values listed are correct (or look reasonable anyway) -- this only
 # displays snippets of the input data, not the full dataset
@@ -147,7 +147,7 @@
 # is unique for each plant-temperature combination (each A-Ci curve fit).
 # For example, Ident of 40_Sicot_3 means when we call fitacis4 all rows with
 # that Ident will be grouped into a single A/Ci analysis (in this case the 3rd
-# replicate of a 'Sicot' plant in a 40 degree Celsius  experiment)
+# replicate of a 'Sicot' plant in a 40-degree Celsius experiment)
 
   testd$Ident = as.factor(testd$Ident)
 
