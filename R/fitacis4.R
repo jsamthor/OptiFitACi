@@ -134,10 +134,12 @@
                Tcorrect     = FALSE,
                useRd        = FALSE,
                citransition = NULL,      # umol CO2 mol-1
-               PPFD         = NULL,      # umol photons (PAR) m-2 s-1
+               PPFD         = NULL,      # umol photons (PAR) m-2 s-1 [incident]
                Tleaf        = NULL,      # degrees Celsius
-               alpha        = 0.24,      # umol CO2 / umol photons
-               theta        = 0.85,      # fitaci default
+               alpha        = 0.24,      # umol electron / umol photons [incident
+                                         # PAR]
+               theta        = 0.85,      # smoothing parameter in electron
+                                         # transport-PPFD relationship
 
                varnames     = list(ALEAF = "Photo",  # umol CO2 m-2 s-1
                                    Tleaf = "Tleaf",  # degrees Celsius
