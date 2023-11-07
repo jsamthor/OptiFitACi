@@ -127,10 +127,11 @@
                Egamma       = 28.11,     # kJ mol-1              [cotton]
                fitmethod    = "default",
                fitTPU       = TRUE,
-               alphag       = 0,         # default, fraction (0-1) of glycolate NOT
-                                         # returned to the chloroplast in
-                                         # photorespiration. alphag = 0 is the MOST
-                                         # efficient option (flat line TPU limitation)
+               alphag       = 0,         # default, fraction (0-1) of glycolate
+                                         # NOT returned to chloroplasts in
+                                         # photorespiration. alphag = 0 is the
+                                         # MOST efficient option (flat line TPU
+                                         #limitation)
                Tcorrect     = FALSE,
                useRd        = FALSE,
                citransition = NULL,      # umol CO2 mol-1
