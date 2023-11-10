@@ -252,16 +252,20 @@
     names(fits)[i] = data[[i]]$group[1]    # Assign names
   }                                         # End of this curve fit
 			  
-# We can check to see that there are no outright failed fits to the data here.
+# We can check to see that there were no outright failed fits to the data.
 # This loop will print a message for any (each) experiment that failed to
 # produce a proper R list object; an examination of the input data may be in
-# order for such cases (e.g., is there a negative Ci, etc.)
+# order for such cases, e.g., is there a negative Ci or some other
+# impossible or unwanted variable value in the input dataset 
 
-  for (i in 1:length(fits1)) { if (!is.list(fits1[[i]])) {
-                               print(paste('NOTE: experiment', i, 'FAILED'))
-                               print(paste('NOTE: that was group', data[[i]]$group[1]))
-                               print(paste('NOTE: Data QA may be needed')) }
-                             }
+  for (i in 1:length(fits1)) {
+    if (!is.list(fits1[[i]])) {
+      print(      '==============================================')
+      print(paste('ERROR: Fit for experiment', i, 'FAILED'))
+      print(paste('ERROR: That was data group', data[[i]]$group[1]))
+      print(paste('ERROR: Input data inspection/QA may be needed'))
+      print(      '==============================================') }
+  }
 
   return(fits)                              # Return all curve fits in list
 }                                           # End of function fitacis4
