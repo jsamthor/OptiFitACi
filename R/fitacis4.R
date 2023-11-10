@@ -253,7 +253,7 @@
                    error = function(e) paste("Failed") )
 
     names(fits)[i] = data[[i]]$group[1]    # Assign names
-  }                                         # End of this curve fit
+  }                                        # End of this curve fit
 			  
 # We can check to see that there were no outright failed fits to the data.
 # This loop will print a message for any (each) experiment that failed to
@@ -263,11 +263,13 @@
 
   for (i in 1:length(fits)) {
     if (!is.list(fits[[i]])) {
-      print(      '==============================================')
+      print(      '====================================================')
       print(paste('ERROR: Fit for experiment', i, 'FAILED'))
       print(paste('ERROR: That was data group', data[[i]]$group[1]))
-      print(paste('ERROR: Input data inspection/QA may be needed'))
-      print(      '==============================================') }
+      print(      'ERROR: Input data inspection/QA may be needed')
+      print(      'You are advised to rerun this analysis AFTER either'
+      print(      'fixing the input data or deleting it from the input file')
+      print(      '===================================================') }
   }
 
   return(fits)                              # Return all curve fits in list
