@@ -258,8 +258,8 @@
 # order for such cases, e.g., is there a negative Ci or some other
 # impossible or unwanted variable value in the input dataset 
 
-  for (i in 1:length(fits1)) {
-    if (!is.list(fits1[[i]])) {
+  for (i in 1:length(fits)) {
+    if (!is.list(fits[[i]])) {
       print(      '==============================================')
       print(paste('ERROR: Fit for experiment', i, 'FAILED'))
       print(paste('ERROR: That was data group', data[[i]]$group[1]))
