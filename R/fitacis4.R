@@ -151,24 +151,25 @@
 
 # Assign group names and pressure
 
-  data$group1 <- data[, group1]
-  data$Press  <- data[, varnames$Press]
+  data$group1 = data[, group1]
+  data$Press  = data[, varnames$Press]
 
-  if (!is.na(group2)) { data$group2 <- data[, group2] }
-  if (!is.na(group3)) { data$group3 <- data[, group3] }
+  if (!is.na(group2)) { data$group2 = data[, group2] }
+  if (!is.na(group3)) { data$group3 = data[, group3] }
 
   if (!is.na(group2) & !is.na(group3)) {
-  data <- unite(data, col = "group", c("group1", "group2", "group3"), sep = "_")
+    data = unite(data, col = "group", c("group1", "group2", "group3"),
+		 sep = "_")
   } else {
     if (!is.na(group2) & is.na(group3)) {
-      data <- unite(data, col = "group", c("group1", "group2"), sep = "_")
+      data = unite(data, col = "group", c("group1", "group2"), sep = "_")
     } else {
-      data$group <- data$group1
+      data$group = data$group1
     }
   }
 
-  data <- split(data, data$group)           # Split data by group
-  fits <- as.list(1:length(data))           # Create empty list for curve fits
+  data = split(data, data$group)           # Split data by group
+  fits = as.list(1:length(data))           # Create empty list for curve fits
 
 # Fit an A-Ci curve for each 'dataset'/experiment in 'data'
 
@@ -181,7 +182,7 @@
 # mol m-2 s-1 bar-1)
 
     Patm   = mean(data[[i]]$Press)          # measured air pressure
-    Rgas   = 0.00831446                     # gas constant (kJ / K.mole)
+    Rgas   = 0.00831446                     # gas constant (kJ/K.mole)
     Abs_0C = -273.15                        # absolute zero in degree Celsius
     T25K   = 25 - Abs_0C                    # absolute temperature @ 25 deg C
     Tleaf  = mean(data[[i]]$Tleaf)          # measured Tleaf (degree Celsius)
@@ -223,9 +224,11 @@
 
     } else                          {        # BOGUS gm_method value: ERROR
 
-      print ('ERROR--Invalid gm_method')
-      print ('gm_method entered is')
-      print (gm_method)
+      print('==============================================')
+      print('ERROR--Invalid gm_method')
+      print('gm_method entered is:')
+      print(gm_method)
+      print('==============================================')
     }
 
 #-------------------------------------------------------------------------------
@@ -256,7 +259,7 @@
 # This loop will print a message for any (each) experiment that failed to
 # produce a proper R list object; an examination of the input data may be in
 # order for such cases, e.g., is there a negative Ci or some other
-# impossible or unwanted variable value in the input dataset 
+# impossible or unwanted variable value in the input dataset?
 
   for (i in 1:length(fits)) {
     if (!is.list(fits[[i]])) {
