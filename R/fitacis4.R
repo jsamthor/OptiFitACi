@@ -259,7 +259,7 @@
 
   for (i in 1:length(fits1)) { if (!is.list(fits1[[i]])) {
                                print(paste('NOTE: experiment', i, 'FAILED'))
-                               print(paste('NOTE: that was group', names(fits)[i]))
+                               print(paste('NOTE: that was group', data[[i]]$group[1]))
                                print(paste('NOTE: Data QA may be needed')) }
                              }
 
