@@ -267,7 +267,7 @@
       print(paste('ERROR: Fit for experiment', i, 'FAILED'))
       print(paste('ERROR: That was data group', data[[i]]$group[1]))
       print(      'ERROR: Input data inspection/QA may be needed')
-      print(      'You are advised to rerun this analysis AFTER either'
+      print(      'You are advised to rerun this analysis AFTER either')
       print(      'fixing the input data or deleting it from the input file')
       print(      '===================================================') }
   }
