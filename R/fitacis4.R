@@ -93,8 +93,7 @@
 # are the same as in fitacis2 (but slightly faster)
 #
 # J.S. Amthor, November 2023 [update]
-#------------------------------------------------------------------------------
-
+#===============================================================================
   fitacis4 = function (data,
                group1 = "Plant",
                group2 = NA,
@@ -243,15 +242,26 @@
 #-------------------------------------------------------------------------------
 # Fit A-Ci curve by calling the 'fitaci' function with desired input values
 
-    fits[[i]] <- tryCatch(fitaci(data[[i]], Patm = Patm, varnames = varnames,
+    fits[[i]] = tryCatch(fitaci(data[[i]], Patm = Patm, varnames = varnames,
                    fitmethod = fitmethod, Tcorrect = Tcorrect, fitTPU = fitTPU,
                    gmeso = gmeso, Km = Km, GammaStar = GammaStar, useRd = useRd,
                    citransition = citransition, alphag = alphag, PPFD = PPFD,
                    Tleaf = Tleaf, alpha = alpha, theta = theta,  ...),
                    error = function(e) paste("Failed") )
 
-    names(fits)[i] <- data[[i]]$group[1]    # Assign names
+    names(fits)[i] = data[[i]]$group[1]    # Assign names
   }                                         # End of this curve fit
+			  
+# We can check to see that there are no outright failed fits to the data here.
+# This loop will print a message for any (each) experiment that failed to
+# produce a proper R list object; an examination of the input data may be in
+# order for such cases (e.g., is there a negative Ci, etc.)
+
+  for (i in 1:length(fits1)) { if (!is.list(fits1[[i]])) {
+                               print(paste('NOTE: experiment', i, 'FAILED'))
+                               print(paste('NOTE: that was group', names(fits)[i]))
+                               print(paste('NOTE: Data QA may be needed')) }
+                             }
 
   return(fits)                              # Return all curve fits in list
 }                                           # End of function fitacis4
