@@ -240,7 +240,7 @@
 # contributing to a single A-Ci fit, we use their average (we also use their
 # average if they are all the same)
 
-    if (useRd) data[[i]]$Rd = mean(data[[i]]$Rd)
+    if (useRd) data[[i]]$Rd = mean(data[[i]]$Rd, na.rm=T)
 
 #-------------------------------------------------------------------------------
 # Fit A-Ci curve by calling the 'fitaci' function with desired input values
